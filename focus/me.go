@@ -55,6 +55,20 @@ func fixQuote(text []string) string {
 	return quote.ReplaceAllString(word, "'$1'")
 }
 
+func ToCapN(word []string, n int) []string {
+	if n > len(word) {
+		n = len(word)
+	}
+	result := make([]string, len(word))
+	copy(result, word)
+
+	for i := n - 1; i < len(word); i++ {
+		result[i] = strings.Title(word[i])
+	}
+
+	return result
+}
+
 func main() {
 	input6 := []string{"As Elton John said: ' I am the most well-known homosexual in the world '"}
 	fixedQuote := fixQuote(input6)
@@ -81,6 +95,16 @@ func main() {
 	upper := ToUpper(input)
 	capitalized := ToCap(input)
 
+	input9 := "this is so exciting"
+	words := strings.Fields(input9)
+	focus := ToCapN(words, 1)
+	fmt.Println(strings.Join(focus, " "))
+
+	input8 := "this is so exciting"
+	tex := strings.Fields(input8)
+	resu := ToUpperN(tex, 1)
+	fmt.Println(strings.Join(resu, " "))
+
 	fmt.Println("Punctuation: ", d)
 	fmt.Println("English: ", article)
 	fmt.Println("capitalized: ", capitalized)
@@ -89,19 +113,19 @@ func main() {
 	fmt.Println("binary: ", bini)
 	fmt.Println("hexadecimal: ", hexe)
 
-	input7 := "this is so exciting"
+	input7 := "THIS IS SO EXCITING"
 	texts := strings.Fields(input7)
-	result := ToUpperN(texts, 1)
+	result := ToLowerN(texts, 1)
 	fmt.Println(strings.Join(result, " "))
+
 	// input7 := "this is so exciting"
 	// texts := strings.Fields(input7)
 	// result := ToUpperN(, 2)
 	// fmt.Println(strings.Join(result, " "))
 	// word := strings.Fields(input7)
 	// result := ToUpperN(word, 2)
-	// fmt.Println(strings.Join(result, " ")) 
+	// fmt.Println(strings.Join(result, " "))
 }
-
 
 func ToUpperN(word []string, n int) []string {
 	if n > len(word) {
@@ -110,8 +134,22 @@ func ToUpperN(word []string, n int) []string {
 	result := make([]string, len(word))
 	copy(result, word)
 
-	for i := n + 1; i < len(word); i++ { 
+	for i := n + 1; i < len(word); i++ {
 		result[i] = strings.ToUpper(word[i])
+	}
+
+	return result
+}
+
+func ToLowerN(word []string, n int) []string {
+	if n > len(word) {
+		n = len(word)
+	}
+	result := make([]string, len(word))
+	copy(result, word)
+
+	for i := n + 1; i < len(word); i++ {
+		result[i] = strings.ToLower(word[i])
 	}
 
 	return result
